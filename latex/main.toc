@@ -1,0 +1,322 @@
+\contentsline {paragraph}{Contents of this Repository}{1}{section*.1}%
+\contentsline {paragraph}{GTK 4 Documentation}{1}{section*.2}%
+\contentsline {paragraph}{Contribution}{1}{section*.3}%
+\contentsline {paragraph}{How to get Gtk 4 tutorial with HTML or PDF format}{1}{section*.4}%
+\contentsline {paragraph}{License}{1}{section*.5}%
+\contentsline {section}{\numberline {1}Prerequisite and License}{8}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Prerequisite}{8}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}GTK 4 on a Linux OS}{8}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Ruby and rake for making the document}{8}{subsubsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.2}License}{8}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Preparation}{9}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Installing GTK 4 into Linux distributions}{9}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Installation from the distribution packages}{9}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Installation from the source file}{9}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}How to download this repository}{9}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Download a zip file}{9}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Clone the repository}{9}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Examples in the tutorial}{9}{subsection.2.3}%
+\contentsline {section}{\numberline {3}GtkApplication and GtkApplicationWindow}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}GtkApplication}{10}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}GtkApplication and g\_application\_run}{10}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Signals}{11}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}GtkWindow and GtkApplicationWindow}{13}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}GtkWindow}{13}{subsubsection.3.2.1}%
+\contentsline {paragraph}{Connect it to the GtkApplication.}{14}{section*.8}%
+\contentsline {paragraph}{Show the window.}{14}{section*.9}%
+\contentsline {subsubsection}{\numberline {3.2.2}GtkApplicationWindow}{14}{subsubsection.3.2.2}%
+\contentsline {section}{\numberline {4}Widgets (1)}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}GtkLabel, GtkButton and GtkBox}{15}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}GtkLabel}{15}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}GtkButton}{17}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}GtkBox}{19}{subsubsection.4.1.3}%
+\contentsline {section}{\numberline {5}Widgets (2)}{21}{section.5}%
+\contentsline {subsection}{\numberline {5.1}GtkTextView, GtkTextBuffer and GtkScrolledWindow}{21}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}GtkTextView and GtkTextBuffer}{21}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}GtkScrolledWindow}{22}{subsubsection.5.1.2}%
+\contentsline {section}{\numberline {6}Strings and memory management}{24}{section.6}%
+\contentsline {subsection}{\numberline {6.1}String and memory}{24}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Read only string}{25}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Strings defined as arrays}{25}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Strings in the heap area}{26}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}const qualifier}{27}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Widgets (3)}{27}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Open signal}{27}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}G\_APPLICATION\_HANDLES\_OPEN flag}{27}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}open signal}{28}{subsubsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.2}File viewer}{28}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}What is a file viewer?}{28}{subsubsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.3}GtkNotebook}{31}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Defining a final class}{33}{section.8}%
+\contentsline {subsection}{\numberline {8.1}A very simple editor}{33}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}How to define a child class of GtkTextView}{33}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Close-request signal}{35}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Source code of tfe1.c}{36}{subsection.8.4}%
+\contentsline {section}{\numberline {9}GtkBuilder and UI file}{38}{section.9}%
+\contentsline {subsection}{\numberline {9.1}New, Open and Save button}{38}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}The UI File}{41}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}GtkBuilder}{42}{subsection.9.3}%
+\contentsline {subsubsection}{\numberline {9.3.1}Using ui string}{44}{subsubsection.9.3.1}%
+\contentsline {subsubsection}{\numberline {9.3.2}Gresource}{45}{subsubsection.9.3.2}%
+\contentsline {section}{\numberline {10}Build system}{46}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Managing big source files}{46}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Divide a C source file into two parts.}{46}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Meson and Ninja}{49}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Instance Initialization and destruction}{49}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Encapsulation}{50}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}GObject and its children}{50}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Initialization of TfeTextView instances}{51}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Functions and Classes}{52}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}TfeTextView class}{53}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.6}Destruction of TfeTextView}{56}{subsection.11.6}%
+\contentsline {section}{\numberline {12}Signals}{58}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Signals}{58}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Signal registration}{58}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Signal connection}{60}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Signal emission}{60}{subsection.12.4}%
+\contentsline {section}{\numberline {13}TfeTextView class}{60}{section.13}%
+\contentsline {subsection}{\numberline {13.1}tfetextview.h}{60}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Constructors}{61}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Save and saveas functions}{62}{subsection.13.3}%
+\contentsline {subsubsection}{\numberline {13.3.1}save\_file function}{63}{subsubsection.13.3.1}%
+\contentsline {subsubsection}{\numberline {13.3.2}save\_dialog\_cb function}{64}{subsubsection.13.3.2}%
+\contentsline {subsubsection}{\numberline {13.3.3}tfe\_text\_view\_save function}{64}{subsubsection.13.3.3}%
+\contentsline {subsubsection}{\numberline {13.3.4}tfe\_text\_view\_saveas function}{65}{subsubsection.13.3.4}%
+\contentsline {subsection}{\numberline {13.4}Open related functions}{66}{subsection.13.4}%
+\contentsline {subsubsection}{\numberline {13.4.1}open\_dialog\_cb function}{66}{subsubsection.13.4.1}%
+\contentsline {subsubsection}{\numberline {13.4.2}tfe\_text\_view\_open function}{67}{subsubsection.13.4.2}%
+\contentsline {subsection}{\numberline {13.5}Getting GFile in TfeTextView}{69}{subsection.13.5}%
+\contentsline {subsection}{\numberline {13.6}The API document and source file of tfetextview.c}{69}{subsection.13.6}%
+\contentsline {section}{\numberline {14}Functions in GtkNotebook}{69}{section.14}%
+\contentsline {subsection}{\numberline {14.1}notebook\_page\_new}{70}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}notebook\_page\_new\_with\_file}{71}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}notebook\_page\_open}{71}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}Floating reference}{72}{subsection.14.4}%
+\contentsline {subsection}{\numberline {14.5}notebook\_page\_close}{72}{subsection.14.5}%
+\contentsline {subsection}{\numberline {14.6}notebook\_page\_save}{73}{subsection.14.6}%
+\contentsline {subsection}{\numberline {14.7}file\_changed\_cb handler}{73}{subsection.14.7}%
+\contentsline {section}{\numberline {15}Tfe main program}{74}{section.15}%
+\contentsline {subsection}{\numberline {15.1}The function main}{74}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Startup signal handler}{74}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}CSS in Gtk}{76}{subsection.15.3}%
+\contentsline {subsubsection}{\numberline {15.3.1}CSS nodes, selectors}{76}{subsubsection.15.3.1}%
+\contentsline {subsubsection}{\numberline {15.3.2}GtkStyleContext, GtkCssProvider and GdkDisplay}{76}{subsubsection.15.3.2}%
+\contentsline {subsection}{\numberline {15.4}Activate and open signal handler}{77}{subsection.15.4}%
+\contentsline {subsection}{\numberline {15.5}A primary instance}{77}{subsection.15.5}%
+\contentsline {subsection}{\numberline {15.6}A series of handlers correspond to the button signals}{78}{subsection.15.6}%
+\contentsline {subsection}{\numberline {15.7}meson.build}{78}{subsection.15.7}%
+\contentsline {subsection}{\numberline {15.8}source files}{78}{subsection.15.8}%
+\contentsline {section}{\numberline {16}How to build tfe (text file editor)}{79}{section.16}%
+\contentsline {subsection}{\numberline {16.1}How to compile and execute the text editor `tfe'.}{79}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Total number of lines, words and characters}{79}{subsection.16.2}%
+\contentsline {section}{\numberline {17}Menus and actions}{79}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Menus}{79}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.2}GMenuModel, GMenu and GMenuItem}{80}{subsection.17.2}%
+\contentsline {subsection}{\numberline {17.3}Menu and action}{81}{subsection.17.3}%
+\contentsline {subsection}{\numberline {17.4}Menu bar}{81}{subsection.17.4}%
+\contentsline {subsection}{\numberline {17.5}Simple example}{82}{subsection.17.5}%
+\contentsline {subsection}{\numberline {17.6}Compiling}{83}{subsection.17.6}%
+\contentsline {subsection}{\numberline {17.7}Primary and remote application instances}{84}{subsection.17.7}%
+\contentsline {section}{\numberline {18}Stateful action}{84}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Stateful action without a parameter}{85}{subsection.18.1}%
+\contentsline {subsubsection}{\numberline {18.1.1}GVariant}{86}{subsubsection.18.1.1}%
+\contentsline {subsection}{\numberline {18.2}Stateful action with a parameter}{86}{subsection.18.2}%
+\contentsline {subsubsection}{\numberline {18.2.1}GVariantType}{87}{subsubsection.18.2.1}%
+\contentsline {subsection}{\numberline {18.3}Example}{88}{subsection.18.3}%
+\contentsline {subsection}{\numberline {18.4}Compile}{91}{subsection.18.4}%
+\contentsline {section}{\numberline {19}Ui file for menu and action entries}{91}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Ui file for menu}{91}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Action entry}{93}{subsection.19.2}%
+\contentsline {subsection}{\numberline {19.3}Example}{95}{subsection.19.3}%
+\contentsline {section}{\numberline {20}Composite widgets and alert dialog}{97}{section.20}%
+\contentsline {subsection}{\numberline {20.1}An outline of new Tfe text editor}{97}{subsection.20.1}%
+\contentsline {subsection}{\numberline {20.2}Composite widgets}{97}{subsection.20.2}%
+\contentsline {subsection}{\numberline {20.3}The XML file}{98}{subsection.20.3}%
+\contentsline {subsection}{\numberline {20.4}The header file}{99}{subsection.20.4}%
+\contentsline {subsection}{\numberline {20.5}The C file}{100}{subsection.20.5}%
+\contentsline {subsubsection}{\numberline {20.5.1}Functions for composite widgets}{100}{subsubsection.20.5.1}%
+\contentsline {subsubsection}{\numberline {20.5.2}Other functions}{102}{subsubsection.20.5.2}%
+\contentsline {subsection}{\numberline {20.6}An example}{104}{subsection.20.6}%
+\contentsline {section}{\numberline {21}GtkFontDialogButton and Gsettings}{105}{section.21}%
+\contentsline {subsection}{\numberline {21.1}The preference dialog}{105}{subsection.21.1}%
+\contentsline {subsection}{\numberline {21.2}A composite widget}{105}{subsection.21.2}%
+\contentsline {subsection}{\numberline {21.3}The header file}{107}{subsection.21.3}%
+\contentsline {subsection}{\numberline {21.4}The C file for composite widget}{107}{subsection.21.4}%
+\contentsline {subsection}{\numberline {21.5}GtkFontDialogButton and Pango}{108}{subsection.21.5}%
+\contentsline {subsection}{\numberline {21.6}GSettings}{108}{subsection.21.6}%
+\contentsline {subsubsection}{\numberline {21.6.1}GSettings schema}{108}{subsubsection.21.6.1}%
+\contentsline {subsubsection}{\numberline {21.6.2}Gsettings command}{109}{subsubsection.21.6.2}%
+\contentsline {subsubsection}{\numberline {21.6.3}Glib-compile-schemas utility}{111}{subsubsection.21.6.3}%
+\contentsline {subsubsection}{\numberline {21.6.4}GSettings object and binding}{112}{subsubsection.21.6.4}%
+\contentsline {subsection}{\numberline {21.7}C file}{113}{subsection.21.7}%
+\contentsline {subsection}{\numberline {21.8}Test program}{115}{subsection.21.8}%
+\contentsline {subsubsection}{\numberline {21.8.1}Compile the schema file}{116}{subsubsection.21.8.1}%
+\contentsline {subsubsection}{\numberline {21.8.2}Compile the XML file}{116}{subsubsection.21.8.2}%
+\contentsline {subsubsection}{\numberline {21.8.3}Compile the C file}{116}{subsubsection.21.8.3}%
+\contentsline {subsubsection}{\numberline {21.8.4}Run the executable file}{116}{subsubsection.21.8.4}%
+\contentsline {subsubsection}{\numberline {21.8.5}Meson-ninja way}{116}{subsubsection.21.8.5}%
+\contentsline {section}{\numberline {22}TfeWindow}{117}{section.22}%
+\contentsline {subsection}{\numberline {22.1}The Tfe window and XML files}{117}{subsection.22.1}%
+\contentsline {subsection}{\numberline {22.2}The header file}{119}{subsection.22.2}%
+\contentsline {subsection}{\numberline {22.3}C file}{120}{subsection.22.3}%
+\contentsline {subsubsection}{\numberline {22.3.1}A composite widget}{120}{subsubsection.22.3.1}%
+\contentsline {subsubsection}{\numberline {22.3.2}Actions}{120}{subsubsection.22.3.2}%
+\contentsline {subsubsection}{\numberline {22.3.3}The handlers of the actions}{121}{subsubsection.22.3.3}%
+\contentsline {paragraph}{open\_activated}{121}{section*.10}%
+\contentsline {paragraph}{save\_activated}{123}{section*.11}%
+\contentsline {paragraph}{close\_activated}{123}{section*.12}%
+\contentsline {paragraph}{new\_activated}{124}{section*.13}%
+\contentsline {paragraph}{saveas\_activated}{125}{section*.14}%
+\contentsline {paragraph}{pref\_activated}{125}{section*.15}%
+\contentsline {paragraph}{close\_all\_activated}{125}{section*.16}%
+\contentsline {subsubsection}{\numberline {22.3.4}Window ``close-request'' signal}{125}{subsubsection.22.3.4}%
+\contentsline {subsubsection}{\numberline {22.3.5}Public functions}{126}{subsubsection.22.3.5}%
+\contentsline {subsubsection}{\numberline {22.3.6}Full codes of tfewindow.c}{127}{subsubsection.22.3.6}%
+\contentsline {section}{\numberline {23}Pango, CSS and Application}{132}{section.23}%
+\contentsline {subsection}{\numberline {23.1}PangoFontDescription}{132}{subsection.23.1}%
+\contentsline {subsection}{\numberline {23.2}Converter from PangoFontDescription to CSS}{133}{subsection.23.2}%
+\contentsline {subsection}{\numberline {23.3}Application object}{135}{subsection.23.3}%
+\contentsline {subsubsection}{\numberline {23.3.1}TfeApplication class}{135}{subsubsection.23.3.1}%
+\contentsline {subsubsection}{\numberline {23.3.2}Startup signal handlers}{136}{subsubsection.23.3.2}%
+\contentsline {subsubsection}{\numberline {23.3.3}Activate and open signal handlers}{137}{subsubsection.23.3.3}%
+\contentsline {subsubsection}{\numberline {23.3.4}CSS font setting}{138}{subsubsection.23.3.4}%
+\contentsline {subsection}{\numberline {23.4}Other files}{138}{subsection.23.4}%
+\contentsline {subsection}{\numberline {23.5}Compilation and installation.}{139}{subsection.23.5}%
+\contentsline {section}{\numberline {24}GtkDrawingArea and Cairo}{140}{section.24}%
+\contentsline {subsection}{\numberline {24.1}Cairo}{140}{subsection.24.1}%
+\contentsline {subsection}{\numberline {24.2}GtkDrawingArea}{142}{subsection.24.2}%
+\contentsline {section}{\numberline {25}Periodic Events}{143}{section.25}%
+\contentsline {subsection}{\numberline {25.1}How do we create an animation?}{144}{subsection.25.1}%
+\contentsline {subsection}{\numberline {25.2}Drawing the clock face, hour, minute and second hands}{144}{subsection.25.2}%
+\contentsline {subsection}{\numberline {25.3}The Complete code}{147}{subsection.25.3}%
+\contentsline {section}{\numberline {26}Custom drawing}{150}{section.26}%
+\contentsline {subsection}{\numberline {26.1}rect.gresource.xml}{151}{subsection.26.1}%
+\contentsline {subsection}{\numberline {26.2}rect.ui}{151}{subsection.26.2}%
+\contentsline {subsection}{\numberline {26.3}rect.c}{151}{subsection.26.3}%
+\contentsline {subsubsection}{\numberline {26.3.1}GtkApplication}{151}{subsubsection.26.3.1}%
+\contentsline {subsubsection}{\numberline {26.3.2}GtkDrawingArea}{152}{subsubsection.26.3.2}%
+\contentsline {subsubsection}{\numberline {26.3.3}GtkGestureDrag}{153}{subsubsection.26.3.3}%
+\contentsline {subsection}{\numberline {26.4}Build and run}{155}{subsection.26.4}%
+\contentsline {section}{\numberline {27}Tiny turtle graphics interpreter}{156}{section.27}%
+\contentsline {subsection}{\numberline {27.1}How to use turtle}{156}{subsection.27.1}%
+\contentsline {subsection}{\numberline {27.2}Combination of TfeTextView and GtkDrawingArea objects}{157}{subsection.27.2}%
+\contentsline {subsection}{\numberline {27.3}What does the interpreter do?}{159}{subsection.27.3}%
+\contentsline {subsection}{\numberline {27.4}Compilation flow}{160}{subsection.27.4}%
+\contentsline {subsection}{\numberline {27.5}Turtle.lex}{162}{subsection.27.5}%
+\contentsline {subsubsection}{\numberline {27.5.1}What does flex do?}{162}{subsubsection.27.5.1}%
+\contentsline {subsubsection}{\numberline {27.5.2}Definitions section}{163}{subsubsection.27.5.2}%
+\contentsline {subsubsection}{\numberline {27.5.3}Rules section}{164}{subsubsection.27.5.3}%
+\contentsline {subsubsection}{\numberline {27.5.4}User code section}{164}{subsubsection.27.5.4}%
+\contentsline {subsection}{\numberline {27.6}Turtle.y}{165}{subsection.27.6}%
+\contentsline {subsubsection}{\numberline {27.6.1}What does bison do?}{165}{subsubsection.27.6.1}%
+\contentsline {subsubsection}{\numberline {27.6.2}Prologue}{168}{subsubsection.27.6.2}%
+\contentsline {subsubsection}{\numberline {27.6.3}Bison declarations}{170}{subsubsection.27.6.3}%
+\contentsline {subsubsection}{\numberline {27.6.4}Grammar rules}{172}{subsubsection.27.6.4}%
+\contentsline {subsubsection}{\numberline {27.6.5}Epilogue}{174}{subsubsection.27.6.5}%
+\contentsline {paragraph}{Functions to create tree nodes}{174}{section*.17}%
+\contentsline {paragraph}{Symbol table}{175}{section*.18}%
+\contentsline {paragraph}{Stack for parameters and arguments}{177}{section*.19}%
+\contentsline {paragraph}{Surface and cairo}{179}{section*.20}%
+\contentsline {paragraph}{Eval function}{181}{section*.21}%
+\contentsline {paragraph}{Execute function}{182}{section*.22}%
+\contentsline {paragraph}{Runtime entry and error functions}{186}{section*.23}%
+\contentsline {section}{\numberline {28}Drag and drop}{188}{section.28}%
+\contentsline {subsection}{\numberline {28.1}What's drag and drop?}{188}{subsection.28.1}%
+\contentsline {subsection}{\numberline {28.2}Example for DND}{188}{subsection.28.2}%
+\contentsline {subsection}{\numberline {28.3}UI file}{188}{subsection.28.3}%
+\contentsline {subsection}{\numberline {28.4}C file dnd.c}{189}{subsection.28.4}%
+\contentsline {subsubsection}{\numberline {28.4.1}Startup signal handler}{190}{subsubsection.28.4.1}%
+\contentsline {subsubsection}{\numberline {28.4.2}Activate signal handler}{191}{subsubsection.28.4.2}%
+\contentsline {subsubsection}{\numberline {28.4.3}Drop signal handler}{191}{subsubsection.28.4.3}%
+\contentsline {subsection}{\numberline {28.5}Meson.build}{192}{subsection.28.5}%
+\contentsline {section}{\numberline {29}GtkListView}{192}{section.29}%
+\contentsline {subsection}{\numberline {29.1}Outline}{192}{subsection.29.1}%
+\contentsline {subsection}{\numberline {29.2}GListModel and GtkStringList}{192}{subsection.29.2}%
+\contentsline {subsection}{\numberline {29.3}GtkSelectionModel}{193}{subsection.29.3}%
+\contentsline {subsection}{\numberline {29.4}GtkListView}{193}{subsection.29.4}%
+\contentsline {subsection}{\numberline {29.5}GtkListItemFactory}{194}{subsection.29.5}%
+\contentsline {subsubsection}{\numberline {29.5.1}GtkSignalListItemFactory}{194}{subsubsection.29.5.1}%
+\contentsline {subsubsection}{\numberline {29.5.2}GtkBuilderListItemFactory}{196}{subsubsection.29.5.2}%
+\contentsline {subsection}{\numberline {29.6}GtkDirectoryList}{198}{subsection.29.6}%
+\contentsline {section}{\numberline {30}GtkGridView and activate signal}{200}{section.30}%
+\contentsline {subsection}{\numberline {30.1}GtkDirectoryList}{202}{subsection.30.1}%
+\contentsline {subsection}{\numberline {30.2}Ui file of the window}{203}{subsection.30.2}%
+\contentsline {subsection}{\numberline {30.3}Factories}{204}{subsection.30.3}%
+\contentsline {subsection}{\numberline {30.4}An activate signal handler of the button action}{206}{subsection.30.4}%
+\contentsline {subsection}{\numberline {30.5}Activate signal on GtkListView and GtkGridView}{207}{subsection.30.5}%
+\contentsline {subsubsection}{\numberline {30.5.1}Content type and application launch}{207}{subsubsection.30.5.1}%
+\contentsline {subsection}{\numberline {30.6}Compilation and execution}{208}{subsection.30.6}%
+\contentsline {subsection}{\numberline {30.7}``gbytes'' property of GtkBuilderListItemFactory}{209}{subsection.30.7}%
+\contentsline {section}{\numberline {31}GtkExpression}{210}{section.31}%
+\contentsline {subsection}{\numberline {31.1}Constant expression}{210}{subsection.31.1}%
+\contentsline {subsection}{\numberline {31.2}Property expression}{211}{subsection.31.2}%
+\contentsline {subsection}{\numberline {31.3}Closure expression}{212}{subsection.31.3}%
+\contentsline {subsection}{\numberline {31.4}GtkExpressionWatch}{213}{subsection.31.4}%
+\contentsline {subsubsection}{\numberline {31.4.1}gtk\_expression\_bind function}{213}{subsubsection.31.4.1}%
+\contentsline {subsubsection}{\numberline {31.4.2}gtk\_expression\_watch function}{216}{subsubsection.31.4.2}%
+\contentsline {subsection}{\numberline {31.5}Gtkexpression in ui files}{218}{subsection.31.5}%
+\contentsline {subsection}{\numberline {31.6}Conversion between GValues}{221}{subsection.31.6}%
+\contentsline {subsection}{\numberline {31.7}Meson.build}{221}{subsection.31.7}%
+\contentsline {section}{\numberline {32}GtkColumnView}{222}{section.32}%
+\contentsline {subsection}{\numberline {32.1}GtkColumnView}{222}{subsection.32.1}%
+\contentsline {subsection}{\numberline {32.2}column.ui}{222}{subsection.32.2}%
+\contentsline {subsection}{\numberline {32.3}GtkSortListModel and GtkSorter}{226}{subsection.32.3}%
+\contentsline {subsection}{\numberline {32.4}column.c}{227}{subsection.32.4}%
+\contentsline {subsection}{\numberline {32.5}Compilation and execution.}{229}{subsection.32.5}%
+\contentsline {section}{\numberline {33}GtkSignalListItemFactory}{230}{section.33}%
+\contentsline {subsection}{\numberline {33.1}GtkSignalListItemFactory and GtkBulderListItemFactory}{230}{subsection.33.1}%
+\contentsline {subsection}{\numberline {33.2}A list editor}{230}{subsection.33.2}%
+\contentsline {subsection}{\numberline {33.3}Connect a GtkText instance and an item in the list}{231}{subsection.33.3}%
+\contentsline {subsection}{\numberline {33.4}Change the cell of GtkColumnView dynamically}{232}{subsection.33.4}%
+\contentsline {subsection}{\numberline {33.5}A waring from GtkText}{234}{subsection.33.5}%
+\contentsline {section}{\numberline {A}Turtle manual}{236}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Prerequisite and compiling}{236}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Example}{236}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Background and foreground color}{237}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Other simple commands}{238}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}Comment and spaces}{238}{subsection.A.5}%
+\contentsline {subsection}{\numberline {A.6}Variables and expressions}{239}{subsection.A.6}%
+\contentsline {subsection}{\numberline {A.7}If statement}{239}{subsection.A.7}%
+\contentsline {subsection}{\numberline {A.8}Loop}{239}{subsection.A.8}%
+\contentsline {subsection}{\numberline {A.9}Procedures}{239}{subsection.A.9}%
+\contentsline {subsection}{\numberline {A.10}Recursive call}{240}{subsection.A.10}%
+\contentsline {subsection}{\numberline {A.11}Fractal curves}{241}{subsection.A.11}%
+\contentsline {subsection}{\numberline {A.12}Tokens and punctuations}{242}{subsection.A.12}%
+\contentsline {subsection}{\numberline {A.13}Grammar}{242}{subsection.A.13}%
+\contentsline {section}{\numberline {B}TfeTextView API reference}{244}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Description}{244}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Hierarchy}{244}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}Ancestors}{244}{subsection.B.3}%
+\contentsline {subsection}{\numberline {B.4}Constructors}{244}{subsection.B.4}%
+\contentsline {subsection}{\numberline {B.5}Instance methods}{244}{subsection.B.5}%
+\contentsline {subsection}{\numberline {B.6}Signals}{244}{subsection.B.6}%
+\contentsline {subsection}{\numberline {B.7}API for constructors, instance methods and signals}{244}{subsection.B.7}%
+\contentsline {subsubsection}{\numberline {B.7.1}tfe\_text\_view\_new()}{244}{subsubsection.B.7.1}%
+\contentsline {subsubsection}{\numberline {B.7.2}tfe\_text\_view\_new\_with\_file()}{244}{subsubsection.B.7.2}%
+\contentsline {subsubsection}{\numberline {B.7.3}tfe\_text\_view\_get\_file()}{245}{subsubsection.B.7.3}%
+\contentsline {subsubsection}{\numberline {B.7.4}tfe\_text\_view\_open()}{245}{subsubsection.B.7.4}%
+\contentsline {subsubsection}{\numberline {B.7.5}tfe\_text\_view\_save()}{245}{subsubsection.B.7.5}%
+\contentsline {subsubsection}{\numberline {B.7.6}tfe\_text\_view\_saveas()}{245}{subsubsection.B.7.6}%
+\contentsline {subsubsection}{\numberline {B.7.7}change-file}{245}{subsubsection.B.7.7}%
+\contentsline {subsubsection}{\numberline {B.7.8}open-response}{246}{subsubsection.B.7.8}%
+\contentsline {subsubsection}{\numberline {B.7.9}TfeTextViewOpenResponseType}{246}{subsubsection.B.7.9}%
+\contentsline {section}{\numberline {C}How to build Gtk4-Tutorial}{246}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}Quick start guide}{246}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}Prerequisites}{246}{subsection.C.2}%
+\contentsline {subsection}{\numberline {C.3}GitHub Flavored Markdown}{246}{subsection.C.3}%
+\contentsline {subsection}{\numberline {C.4}Pandoc's markdown}{246}{subsection.C.4}%
+\contentsline {subsection}{\numberline {C.5}.Src.md file}{247}{subsection.C.5}%
+\contentsline {subsubsection}{\numberline {C.5.1}@@@include}{247}{subsubsection.C.5.1}%
+\contentsline {subsubsection}{\numberline {C.5.2}@@@shell}{249}{subsubsection.C.5.2}%
+\contentsline {subsubsection}{\numberline {C.5.3}@@@if series}{249}{subsubsection.C.5.3}%
+\contentsline {subsubsection}{\numberline {C.5.4}@@@table}{250}{subsubsection.C.5.4}%
+\contentsline {subsection}{\numberline {C.6}Conversion}{251}{subsection.C.6}%
+\contentsline {subsection}{\numberline {C.7}Directory structure}{251}{subsection.C.7}%
+\contentsline {subsection}{\numberline {C.8}Src directory and the top directory}{251}{subsection.C.8}%
+\contentsline {subsection}{\numberline {C.9}The name of files in src directory}{251}{subsection.C.9}%
+\contentsline {subsection}{\numberline {C.10}C source file directory}{251}{subsection.C.10}%
+\contentsline {subsection}{\numberline {C.11}Renumbering}{252}{subsection.C.11}%
+\contentsline {subsection}{\numberline {C.12}Rakefile}{252}{subsection.C.12}%
+\contentsline {subsection}{\numberline {C.13}Generate GFM markdown files}{252}{subsection.C.13}%
+\contentsline {subsection}{\numberline {C.14}Generate html files}{253}{subsection.C.14}%
+\contentsline {subsection}{\numberline {C.15}Generate a pdf file}{253}{subsection.C.15}%

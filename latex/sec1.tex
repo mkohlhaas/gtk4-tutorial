@@ -1,0 +1,96 @@
+\section{Prerequisite and License}\label{prerequisite-and-license}
+
+\subsection{Prerequisite}\label{prerequisite}
+
+\subsubsection{GTK 4 on a Linux OS}\label{gtk-4-on-a-linux-os}
+
+This tutorial describes GTK 4 libraries. It is originally used on Linux
+with C compiler, but now it is used more widely, on Windows and MacOS,
+with Vala, Python, Ruby and so on. However, this tutorial describes only
+\emph{C programs on Linux}.
+
+If you want to try the examples in the tutorial, you need:
+
+\begin{itemize}
+\tightlist
+\item
+  PC with Linux distribution like Ubuntu or Debian.
+\item
+  GCC.
+\item
+  GTK 4 (version 4.10.1 or later).
+\end{itemize}
+
+The stable version of GTK is 4.10.1 at present (24/April/2023). The
+version 4.10 adds some new classes and functions and makes some classes
+and functions deprecated. Some example programs in this tutorial don't
+work on the older version.
+
+\subsubsection{Ruby and rake for making the
+document}\label{ruby-and-rake-for-making-the-document}
+
+This repository includes Ruby programs. They are used to make GFM
+(GitHub Flavoured Markdown) files, HTML files, Latex files and a PDF
+file.
+
+You need:
+
+\begin{itemize}
+\tightlist
+\item
+  Linux.
+\item
+  Ruby programming language. There are two ways to install. One is
+  installing the distribution's package. The other is using rbenv and
+  ruby-build. If you want to use the latest version of ruby, use rbenv.
+\item
+  Rake.
+\end{itemize}
+
+\subsection{License}\label{license}
+
+Copyright (C) 2020,2023 ToshioCP (Toshio Sekiya)
+
+GTK4-tutorial repository contains tutorial documents and programs such
+as converters, generators and controllers. All of them make up the
+`GTK4-tutorial' package. This package is simply called `GTK4-tutorial'
+in the following description.
+
+GTK4-tutorial is free; you can redistribute it and/or modify it under
+the terms of the following licenses.
+
+\begin{itemize}
+\tightlist
+\item
+  The license of documents in GTK4-tutorial is the GNU Free
+  Documentation License as published by the Free Software Foundation;
+  either version 1.3 of the License or, at your opinion, any later
+  version. The documents are Markdown, HTML and image files. If you
+  generate a PDF file by running \passthrough{\lstinline!rake pdf!}, it
+  is also included by the documents.
+\item
+  The license of programs in GTK4-tutorial is the GNU General Public
+  License as published by the Free Software Foundation; either version 3
+  of the License or, at your option, any later version. The programs are
+  written in C, Ruby and other languages.
+\end{itemize}
+
+GTK4-tutorial is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU License
+web pages for more details.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.gnu.org/licenses/fdl-1.3.html}{GNU Free
+  Documentation License}
+\item
+  \href{https://www.gnu.org/licenses/gpl-3.0.html}{GNU General Public
+  License}
+\end{itemize}
+
+The licenses above is effective since 15/April/2023. Before that, GPL
+covered all the contents of the GTK4-tutorial. But GFDL1.3 is more
+appropriate for documents so the license was changed. The license above
+is the only effective license since 15/April/2023.

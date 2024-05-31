@@ -1,0 +1,85 @@
+\paragraph{Contents of this
+Repository}\label{contents-of-this-repository}
+
+This tutorial illustrates how to write C programs with the GTK 4
+library. It focuses on beginners so the contents are limited to the
+basics. The table of contents is at the end of this abstract.
+
+\begin{itemize}
+\tightlist
+\item
+  Section 3 to 23 describes the basics, with the example of a simple
+  editor \passthrough{\lstinline!tfe!} (Text File Editor).
+\item
+  Section 24 to 27 describes GtkDrawingArea.
+\item
+  Section 28 describes Drag and Drop.
+\item
+  Section 29 to 33 describes the list model and the list view
+  (GtkListView, GtkGridView and GtkColumnView). It also describes
+  GtkExpression.
+\end{itemize}
+
+The latest version of the tutorial is located at
+\href{https://github.com/ToshioCP/Gtk4-tutorial}{GTK4-tutorial GitHub
+repository}. You can read it directly without download.
+
+There's a \href{https://toshiocp.github.io/Gtk4-tutorial/}{GitHub Page}
+which is the HTML version of the tutorial.
+
+\paragraph{GTK 4 Documentation}\label{gtk-4-documentation}
+
+Please refer to \href{https://docs.gtk.org/gtk4/index.html}{GTK 4 API
+Reference} and \href{https://developer.gnome.org/}{GNOME Developer
+Documentation Website} for further information.
+
+These websites were opened in August of 2021. The old documents are
+located at \href{https://developer-old.gnome.org/gtk4/stable/}{GTK
+Reference Manual} and \href{https://developer-old.gnome.org/}{GNOME
+Developer Center}.
+
+If you want to know about GObject and the type system, please refer to
+\href{https://github.com/ToshioCP/Gobject-tutorial}{GObject tutorial}.
+GObject is the base of GTK 4, so it is important for developers to
+understand it as well as GTK 4.
+
+\paragraph{Contribution}\label{contribution}
+
+This tutorial is still under development and unstable. Even though the
+codes of the examples have been tested on GTK 4 (version 4.10.1), bugs
+may still exist. If you find any bugs, errors or mistakes in the
+tutorial and C examples, please let me know. You can post it to
+\href{https://github.com/ToshioCP/Gtk4-tutorial/issues}{GitHub issues}.
+You can also post updated files to
+\href{https://github.com/ToshioCP/Gtk4-tutorial/pulls}{pull request}.
+One thing you need to be careful is to correct the source files, which
+are under the `src' directory. Don't modify the files under
+\passthrough{\lstinline!gfm!} or \passthrough{\lstinline!html!}
+directories. After modifying some source files , run
+\passthrough{\lstinline!rake!} to create GFM (GitHub Flavoured Markdown)
+files and run \passthrough{\lstinline!rake html!} to create HTML files.
+
+If you have a question, feel free to post it to
+\passthrough{\lstinline!issue!}. All questions are helpful and will make
+this tutorial get better.
+
+\paragraph{How to get Gtk 4 tutorial with HTML or PDF
+format}\label{how-to-get-gtk-4-tutorial-with-html-or-pdf-format}
+
+If you want to get HTML or PDF format tutorial, make them with
+\passthrough{\lstinline!rake!} command, which is a ruby version of make.
+Type \passthrough{\lstinline!rake html!} for HTML. Type
+\passthrough{\lstinline!rake pdf!} for PDF. An appendix ``How to build
+GTK 4 Tutorial'' describes how to make them.
+
+\paragraph{License}\label{license}
+
+The license of this repository is written in Section1. In short,
+
+\begin{itemize}
+\tightlist
+\item
+  GFDL1.3 for documents
+\item
+  GPL3 for programs
+\end{itemize}

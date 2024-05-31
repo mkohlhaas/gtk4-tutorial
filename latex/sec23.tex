@@ -1,0 +1,680 @@
+\section{Pango, CSS and Application}\label{pango-css-and-application}
+
+\subsection{PangoFontDescription}\label{pangofontdescription}
+
+PangoFontDescription is a C structure for a font. You can get font
+family, style, weight and size. You can also get a string that includes
+font attributes. For example, suppose that the PangoFontDescription has
+a font of ``Noto Sans Mono'', ``Bold'', ``Italic'' and 12 points of
+size. Then the string converted from the PangoFontDescription is ``Noto
+Sans Mono Bold Italic 12''.
+
+\begin{itemize}
+\tightlist
+\item
+  Font family is ``Noto Sans Mono''.
+\item
+  Font style is ``Italic''.
+\item
+  Font weight is ``Bold'', or 700.
+\item
+  Font size is 12 pt.
+\end{itemize}
+
+The font in CSS is different from the string from PangoFontDescription.
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!font: bold italic 12pt "Noto Sans Mono"!}
+\item
+  \passthrough{\lstinline!Noto Sans Mono Bold Italic 12!}
+\end{itemize}
+
+So, it may be easier to use each property, i.e.~font-family, font-style,
+font-weight and font-size, to convert a PangoFontDescription data to
+CSS.
+
+Refer to \href{https://docs.gtk.org/Pango/index.html}{Pango document}
+and \href{https://www.w3.org/TR/css-fonts-3/}{W3C CSS Fonts Module Level
+3} for further information.
+
+\subsection{Converter from PangoFontDescription to
+CSS}\label{converter-from-pangofontdescription-to-css}
+
+Two files \passthrough{\lstinline!pfd2css.h!} and
+\passthrough{\lstinline!pfd2css.c!} include the converter from
+PangoFontDescription to CSS.
+
+\begin{lstlisting}[language=C, numbers=left]
+#pragma once
+
+#include <pango/pango.h>
+
+// Pango font description to CSS style string
+// Returned string is owned by the caller. The caller should free it when it becomes useless.
+
+char*
+pfd2css (PangoFontDescription *pango_font_desc);
+
+// Each element (family, style, weight and size)
+
+const char*
+pfd2css_family (PangoFontDescription *pango_font_desc);
+
+const char*
+pfd2css_style (PangoFontDescription *pango_font_desc);
+
+int
+pfd2css_weight (PangoFontDescription *pango_font_desc);
+
+// Returned string is owned by the caller. The caller should free it when it becomes useless.
+char *
+pfd2css_size (PangoFontDescription *pango_font_desc);
+\end{lstlisting}
+
+The five functions are public. The first function is a convenient
+function to set other four CSS at once.
+
+\begin{lstlisting}[language=C, numbers=left]
+#include <pango/pango.h>
+#include "pfd2css.h"
+
+// Pango font description to CSS style string
+// Returned string is owned by caller. The caller should free it when it is useless.
+
+char*
+pfd2css (PangoFontDescription *pango_font_desc) {
+  char *fontsize;
+
+  fontsize = pfd2css_size (pango_font_desc);
+  return g_strdup_printf ("font-family: \"%s\"; font-style: %s; font-weight: %d; font-size: %s;",
+              pfd2css_family (pango_font_desc), pfd2css_style (pango_font_desc),
+              pfd2css_weight (pango_font_desc), fontsize);
+  g_free (fontsize); 
+}
+
+// Each element (family, style, weight and size)
+
+const char*
+pfd2css_family (PangoFontDescription *pango_font_desc) {
+  return pango_font_description_get_family (pango_font_desc);
+}
+
+const char*
+pfd2css_style (PangoFontDescription *pango_font_desc) {
+  PangoStyle pango_style = pango_font_description_get_style (pango_font_desc);
+  switch (pango_style) {
+  case PANGO_STYLE_NORMAL:
+    return "normal";
+  case PANGO_STYLE_ITALIC:
+    return "italic";
+  case PANGO_STYLE_OBLIQUE:
+    return "oblique";
+  default:
+    return "normal";
+  }
+}
+
+int
+pfd2css_weight (PangoFontDescription *pango_font_desc) {
+  PangoWeight pango_weight = pango_font_description_get_weight (pango_font_desc);
+  switch (pango_weight) {
+  case PANGO_WEIGHT_THIN:
+    return 100;
+  case PANGO_WEIGHT_ULTRALIGHT:
+    return 200;
+  case PANGO_WEIGHT_LIGHT:
+    return 300;
+  case PANGO_WEIGHT_SEMILIGHT:
+    return 350;
+  case PANGO_WEIGHT_BOOK:
+    return 380;
+  case PANGO_WEIGHT_NORMAL:
+    return 400; /* or "normal" */
+  case PANGO_WEIGHT_MEDIUM:
+    return 500;
+  case PANGO_WEIGHT_SEMIBOLD:
+    return 600;
+  case PANGO_WEIGHT_BOLD:
+    return 700; /* or "bold" */
+  case PANGO_WEIGHT_ULTRABOLD:
+    return 800;
+  case PANGO_WEIGHT_HEAVY:
+    return 900;
+  case PANGO_WEIGHT_ULTRAHEAVY:
+    return 900; /* 1000 is available since CSS Fonts level 4 but GTK currently supports level 3. */
+  default:
+    return 400; /* "normal" */
+  }
+}
+
+char *
+pfd2css_size (PangoFontDescription *pango_font_desc) {
+  if (pango_font_description_get_size_is_absolute (pango_font_desc))
+    return g_strdup_printf ("%dpx", pango_font_description_get_size (pango_font_desc) / PANGO_SCALE);
+  else
+    return g_strdup_printf ("%dpt", pango_font_description_get_size (pango_font_desc) / PANGO_SCALE);
+}
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The function \passthrough{\lstinline!pfd2css\_family!} returns font
+  family.
+\item
+  The function \passthrough{\lstinline!pfd2css\_style!} returns font
+  style which is one of ``normal'', ``italic'' or ``oblique''.
+\item
+  The function \passthrough{\lstinline!pfd2css\_weight!} returns font
+  weight in integer. See the list below.
+\item
+  The function \passthrough{\lstinline!pfd2css\_size!} returns font
+  size.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If the font description size is absolute, it returns the size of
+    device unit, which is pixel. Otherwise the unit is point.
+  \item
+    The function
+    \passthrough{\lstinline!pango\_font\_description\_get\_size!}
+    returns the integer of the size but it is multiplied by
+    \passthrough{\lstinline!PANGO\_SCALE!}. So, you need to divide it by
+    \passthrough{\lstinline!PANGO\_SCALE!}. The
+    \passthrough{\lstinline!PANGO\_SCALE!} is currently 1024, but this
+    might be changed in the future. If the font size is 12pt, the size
+    in pango is \passthrough{\lstinline!12*PANGO\_SCALE=12*1024=12288!}.
+  \end{itemize}
+\item
+  The function \passthrough{\lstinline!pfd2css!} returns a string of the
+  font. For example, if a font ``Noto Sans Mono Bold Italic 12'' is
+  given, it returns ``font-family: Noto Sans Mono; font-style: italic;
+  font-weight: 700; font-size: 12pt;''.
+\end{itemize}
+
+The font weight number is one of:
+
+\begin{itemize}
+\tightlist
+\item
+  100 - Thin
+\item
+  200 - Extra Light (Ultra Light)
+\item
+  300 - Light
+\item
+  400 - Normal
+\item
+  500 - Medium
+\item
+  600 - Semi Bold (Demi Bold)
+\item
+  700 - Bold
+\item
+  800 - Extra Bold (Ultra Bold)
+\item
+  900 - Black (Heavy)
+\end{itemize}
+
+\subsection{Application object}\label{application-object}
+
+\subsubsection{TfeApplication class}\label{tfeapplication-class}
+
+TfeApplication class is a child of GtkApplication. It has some instance
+variables. The header file defines the type macro and a public function.
+
+\begin{lstlisting}[language=C, numbers=left]
+#pragma once
+
+#include <gtk/gtk.h>
+
+#define TFE_TYPE_APPLICATION tfe_application_get_type ()
+G_DECLARE_FINAL_TYPE (TfeApplication, tfe_application, TFE, APPLICATION, GtkApplication)
+
+TfeApplication *
+tfe_application_new (const char* application_id, GApplicationFlags flag);
+\end{lstlisting}
+
+The following code is extracted from
+\passthrough{\lstinline!tfeapplication.c!}. It builds TfeApplication
+class and instance.
+
+\begin{lstlisting}[language=C]
+#include <gtk/gtk.h>
+#include "tfeapplication.h"
+
+struct _TfeApplication {
+  GtkApplication parent;
+  TfeWindow *win;
+  GSettings *settings;
+  GtkCssProvider *provider;
+};
+
+G_DEFINE_FINAL_TYPE (TfeApplication, tfe_application, GTK_TYPE_APPLICATION)
+
+static void
+tfe_application_dispose (GObject *gobject) {
+  TfeApplication *app = TFE_APPLICATION (gobject);
+
+  g_clear_object (&app->settings);
+  g_clear_object (&app->provider);
+  G_OBJECT_CLASS (tfe_application_parent_class)->dispose (gobject);
+}
+
+static void
+tfe_application_init (TfeApplication *app) {
+  app->settings = g_settings_new ("com.github.ToshioCP.tfe");
+  g_signal_connect (app->settings, "changed::font-desc", G_CALLBACK (changed_font_cb), app);
+  app->provider = gtk_css_provider_new ();
+}
+
+static void
+tfe_application_class_init (TfeApplicationClass *class) {
+  G_OBJECT_CLASS (class)->dispose = tfe_application_dispose;
+  G_APPLICATION_CLASS (class)->startup = app_startup;
+  G_APPLICATION_CLASS (class)->activate = app_activate;
+  G_APPLICATION_CLASS (class)->open = app_open;
+}
+
+TfeApplication *
+tfe_application_new (const char* application_id, GApplicationFlags flag) {
+  return TFE_APPLICATION (g_object_new (TFE_TYPE_APPLICATION, "application-id", application_id, "flags", flag, NULL));
+}
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The structure \passthrough{\lstinline!\_TfeApplication!} is defined.
+  It has four members. One is its parents and the others are kinds of
+  instance variables. The members are usually initialized in the
+  instance initialization function. And they are released in the
+  disposal function or freed in the finalization function. The members
+  are:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    win: main window instance
+  \item
+    settings: GSettings instance.it is bound to ``font-desc'' item in
+    the GSettings
+  \item
+    provider: a provider for the font of the textview.
+  \end{itemize}
+\item
+  The macro \passthrough{\lstinline!G\_DEFINE\_FINAL\_TYPE!} defines
+  \passthrough{\lstinline!tfe\_application\_get\_type!} function and
+  some other useful things.
+\item
+  The function \passthrough{\lstinline!tfe\_application\_class\_init!}
+  initializes the TfeApplication class. It overrides four class methods.
+  Three class methods \passthrough{\lstinline!startup!},
+  \passthrough{\lstinline!activate!} and \passthrough{\lstinline!open!}
+  points the default signal handlers. The overriding changes the default
+  handlers. You can connect the handlers with
+  \passthrough{\lstinline!g\_signal\_connect!} macro but the result is
+  different. The macro connects a user handler to the signal. The
+  default handler still exists and no change is made to them.
+\item
+  The function \passthrough{\lstinline!tfe\_application\_init!}
+  initializes an instance.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Creates a new GSettings instance and make
+    \passthrough{\lstinline!app->settings!} point it. Then connects the
+    handler \passthrough{\lstinline!changed\_font\_cb!} to the
+    ``changed::font-desc'' signal.
+  \item
+    Creates a new GtkCssProvider instance and make
+    \passthrough{\lstinline!app->provider!} point it.
+  \end{itemize}
+\item
+  The function \passthrough{\lstinline!tfe\_application\_dispose!}
+  releases the GSettings and GtkCssProvider instances. Then, call the
+  parent's dispose handler. It is called ``chaining up''. See
+  \href{https://docs.gtk.org/gobject/tutorial.html\#chaining-up}{GObject
+  document}.
+\end{itemize}
+
+\subsubsection{Startup signal handlers}\label{startup-signal-handlers}
+
+\begin{lstlisting}[language=C, numbers=left]
+static void
+app_startup (GApplication *application) {
+  TfeApplication *app = TFE_APPLICATION (application);
+  int i;
+  GtkCssProvider *provider = gtk_css_provider_new ();
+  GdkDisplay *display;
+
+  G_APPLICATION_CLASS (tfe_application_parent_class)->startup (application);
+
+  app->win = TFE_WINDOW (tfe_window_new (GTK_APPLICATION (app)));
+
+  gtk_css_provider_load_from_data (provider, "textview {padding: 10px;}", -1);
+  display = gdk_display_get_default ();
+  gtk_style_context_add_provider_for_display (display, GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  g_object_unref (provider);
+  gtk_style_context_add_provider_for_display (display, GTK_STYLE_PROVIDER (app->provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+  changed_font_cb (app->settings, "font-desc", app); // Sets the text view font to the font from the gsettings data base.
+
+/* ----- accelerator ----- */ 
+  struct {
+    const char *action;
+    const char *accels[2];
+  } action_accels[] = {
+    { "win.open", { "<Control>o", NULL } },
+    { "win.save", { "<Control>s", NULL } },
+    { "win.close", { "<Control>w", NULL } },
+    { "win.new", { "<Control>n", NULL } },
+    { "win.saveas", { "<Shift><Control>s", NULL } },
+    { "win.close-all", { "<Control>q", NULL } },
+  };
+
+  for (i = 0; i < G_N_ELEMENTS(action_accels); i++)
+    gtk_application_set_accels_for_action(GTK_APPLICATION(app), action_accels[i].action, action_accels[i].accels);
+}
+\end{lstlisting}
+
+The function \passthrough{\lstinline!app\_startup!} replace the default
+signal handlers. It does five things.
+
+\begin{itemize}
+\tightlist
+\item
+  Calls the parent's startup handler. It is called ``chaining up''. The
+  ``startup'' default handler runs before user handlers. So the call for
+  the parent's handler must be done at the beginning.
+\item
+  Creates the main window. This application has only one top level
+  window. In that case, it is a good way to create the window in the
+  startup handler, which is called only once. Activate or open handlers
+  can be called twice or more. Therefore, if you create a window in the
+  activate or open handler, two or more windows can be created.
+\item
+  Sets the default display CSS to ``textview \{padding: 10px;\}''. It
+  sets the GtkTextView, or TfeTextView, padding to 10px and makes the
+  text easier to read. This CSS is fixed and never changed through the
+  application life.
+\item
+  Adds another CSS provider, which is pointed by
+  \passthrough{\lstinline!app->provider!}, to the default display. This
+  CSS depends on the GSettings ``font-desc'' value and it can be changed
+  during the application life time. And calls
+  \passthrough{\lstinline!changed\_font\_cb!} to update the font CSS
+  setting.
+\item
+  Sets application accelerator with the function
+  \passthrough{\lstinline!gtk\_application\_set\_accels\_for\_action!}.
+  Accelerators are kinds of short cut key functions. For example,
+  \passthrough{\lstinline!Ctrl+O!} is an accelerator to activate
+  ``open'' action. Accelerators are written in the array
+  \passthrough{\lstinline!action-accels[]!}. Its element is a structure
+  \passthrough{\lstinline!struct \{const char *action; const char *accels[2];\}!}.
+  The member \passthrough{\lstinline!action!} is an action name. The
+  member \passthrough{\lstinline!accels!} is an array of two pointers.
+  For example,
+  \passthrough{\lstinline!\{"win.open", \{ "<Control>o", NULL \}\}!}
+  tells that the accelerator \passthrough{\lstinline!Ctrl+O!} is
+  connected to the ``win.open'' action. The second element of
+  \passthrough{\lstinline!accels!} is NULL which is the end mark. You
+  can define more than one accelerator keys and the list must ends with
+  NULL (zero). If you want to do so, the array length needs to be three
+  or more. For example,
+  \passthrough{\lstinline!\{"win.open", \{ "<Control>o", "<Alt>o", NULL \}\}!}
+  means two accelerators \passthrough{\lstinline!Ctrl+O!} and
+  \passthrough{\lstinline!Alt+O!} is connected to the ``win.open''
+  action. The parser recognizes ``\textless control\textgreater o'',
+  ``\textless Shift\textgreater\textless Alt\textgreater F2'',
+  ``\textless Ctrl\textgreater minus'' and so on. If you want to use
+  symbol key like ``\textless Ctrl\textgreater-'', use
+  ``\textless Ctrl\textgreater minus'' instead. Such relation between
+  lower case and symbol (character code) is specified in
+  \href{https://gitlab.gnome.org/GNOME/gtk/-/blob/master/gdk/gdkkeysyms.h}{\passthrough{\lstinline!gdkkeysyms.h!}}
+  in the GTK 4 source code.
+\end{itemize}
+
+\subsubsection{Activate and open signal
+handlers}\label{activate-and-open-signal-handlers}
+
+Two functions \passthrough{\lstinline!app\_activate!} and
+\passthrough{\lstinline!app\_open!} replace the default signal handlers.
+
+\begin{lstlisting}[language=C, numbers=left]
+static void
+app_activate (GApplication *application) {
+  TfeApplication *app = TFE_APPLICATION (application);
+
+  tfe_window_notebook_page_new (app->win);
+  gtk_window_present (GTK_WINDOW (app->win));
+}
+
+static void
+app_open (GApplication *application, GFile ** files, gint n_files, const gchar *hint) {
+  TfeApplication *app = TFE_APPLICATION (application);
+
+  tfe_window_notebook_page_new_with_files (app->win, files, n_files);
+  gtk_window_present (GTK_WINDOW (app->win));
+}
+\end{lstlisting}
+
+The original default handlers don't do useful works and you don't need
+to chain up to the parent's default handlers. They just create notebook
+pages and show the top level window.
+
+\subsubsection{CSS font setting}\label{css-font-setting}
+
+\begin{lstlisting}[language=C, numbers=left]
+static void
+changed_font_cb (GSettings *settings, char *key, gpointer user_data) {
+  TfeApplication *app = TFE_APPLICATION (user_data);
+  char *font, *s, *css;
+  PangoFontDescription *pango_font_desc;
+
+  if (g_strcmp0(key, "font-desc") != 0)
+    return;
+  font = g_settings_get_string (app->settings, "font-desc");
+  pango_font_desc = pango_font_description_from_string (font);
+  g_free (font);
+  s = pfd2css (pango_font_desc); // converts Pango Font Description into CSS style string
+  pango_font_description_free (pango_font_desc);
+  css = g_strdup_printf ("textview {%s}", s);
+  gtk_css_provider_load_from_data (app->provider, css, -1);
+  g_free (s);
+  g_free (css);
+}
+\end{lstlisting}
+
+The function \passthrough{\lstinline!changed\_font\_cb!} is a handler
+for ``changed::font-desc'' signal on the GSettings instance. The signal
+name is ``changed'' and ``font-desc'' is a key name. This signal is
+emitted when the value of the ``font-desc'' key is changed. The value is
+bound to the ``font-desc'' property of the GtkFontDialogButton instance.
+Therefore, the handler \passthrough{\lstinline!changed\_font\_cb!} is
+called when the user selects and updates a font through the font dialog.
+
+A string is retrieved from the GSetting database and converts it into a
+pango font description. And a CSS string is made by the function
+\passthrough{\lstinline!pfd2css!} and
+\passthrough{\lstinline!g\_strdup\_printf!}. Then the css provider is
+set to the string. The provider has been inserted to the current display
+in advance. So, the font is applied to the display.
+
+\subsection{Other files}\label{other-files}
+
+main.c
+
+\begin{lstlisting}[language=C, numbers=left]
+#include <gtk/gtk.h>
+#include "tfeapplication.h"
+
+#define APPLICATION_ID "com.github.ToshioCP.tfe"
+
+int
+main (int argc, char **argv) {
+  TfeApplication *app;
+  int stat;
+
+  app = tfe_application_new (APPLICATION_ID, G_APPLICATION_HANDLES_OPEN);
+  stat =g_application_run (G_APPLICATION (app), argc, argv);
+  g_object_unref (app);
+  return stat;
+}
+\end{lstlisting}
+
+Resource XML file.
+
+\begin{lstlisting}[language=XML, numbers=left]
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/github/ToshioCP/tfe">
+    <file>tfewindow.ui</file>
+    <file>tfepref.ui</file>
+    <file>tfealert.ui</file>
+    <file>menu.ui</file>
+  </gresource>
+</gresources>
+\end{lstlisting}
+
+GSchema XML file
+
+\begin{lstlisting}[language=XML, numbers=left]
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/com/github/ToshioCP/tfe/" id="com.github.ToshioCP.tfe">
+    <key name="font-desc" type="s">
+      <default>'Monospace 12'</default>
+      <summary>Font</summary>
+      <description>A font to be used for textview.</description>
+    </key>
+  </schema>
+</schemalist>
+\end{lstlisting}
+
+Meson.build
+
+\begin{lstlisting}[numbers=left]
+project('tfe', 'c', license : 'GPL-3.0-or-later', meson_version:'>=1.0.1', version: '0.5')
+
+gtkdep = dependency('gtk4')
+
+gnome = import('gnome')
+resources = gnome.compile_resources('resources','tfe.gresource.xml')
+gnome.compile_schemas(depend_files: 'com.github.ToshioCP.tfe.gschema.xml')
+
+sourcefiles = files('main.c', 'tfeapplication.c', 'tfewindow.c', 'tfepref.c', 'tfealert.c', 'pfd2css.c', '../tfetextview/tfetextview.c')
+
+executable(meson.project_name(), sourcefiles, resources, dependencies: gtkdep, export_dynamic: true, install: true)
+
+schema_dir = get_option('prefix') / get_option('datadir') / 'glib-2.0/schemas/'
+install_data('com.github.ToshioCP.tfe.gschema.xml', install_dir: schema_dir)
+gnome.post_install (glib_compile_schemas: true)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The function \passthrough{\lstinline!project!} defines project and
+  initialize meson. The first argument is the project name and the
+  second is the language name. The other arguments are keyword
+  arguments.
+\item
+  The function \passthrough{\lstinline!dependency!} defines the
+  denpendent library. Tfe depends GTK4. This is used to create
+  \passthrough{\lstinline!pkg-config!} option in the command line of C
+  compiler to include header files and link libraries. The returned
+  object \passthrough{\lstinline!gtkdep!} is used as an argument to the
+  \passthrough{\lstinline!executable!} function later.
+\item
+  The function \passthrough{\lstinline!import!} imports an extension
+  module. The GNOME module has some convenient methods like
+  \passthrough{\lstinline!gnome.compile\_resources!} and
+  \passthrough{\lstinline!gnome.compile\_schemas!}.
+\item
+  The method \passthrough{\lstinline!gnome.compile\_resources!} compiles
+  and creates resource files. The first argument is the resource name
+  without extension and the second is the name of XML file. The returned
+  value is an array
+  \passthrough{\lstinline!['resources,c', 'resources.h']!}.
+\item
+  The function \passthrough{\lstinline!gnome.compile\_schemas!} compiles
+  the schema files in the current directory. This just creates
+  \passthrough{\lstinline!gschemas.compiled!} in the build directory. It
+  is used to test the executable binary in the build directory. The
+  function doesn't install the schema file.
+\item
+  The function \passthrough{\lstinline!files!} creates a File Object.
+\item
+  The function \passthrough{\lstinline!executable!} defines the
+  compilation elements such as target name, source files, dependencies
+  and installation. The target name is ``tfe''. The source files are
+  elements of `sourcefiles' and `resources'. It uses GTK4 libraries. It
+  can be installed.
+\item
+  The last three lines are post install work. The variable
+  \passthrough{\lstinline!schema\_dir!} is the directory stored the
+  schema file. If meson runs with
+  \passthrough{\lstinline!--prefix=$HOME/.local!} argument, it is
+  \passthrough{\lstinline!$HOME/.local/share/glib-2.9/schemas!}. The
+  function \passthrough{\lstinline!install\_data!} copies the first
+  argument file into the second argument directory. The method
+  \passthrough{\lstinline!gnome.post\_install!} runs
+  \passthrough{\lstinline!glib-compile-schemas!} and updates
+  \passthrough{\lstinline!gschemas\_compiled!} file.
+\end{itemize}
+
+\subsection{Compilation and
+installation.}\label{compilation-and-installation.}
+
+If you want to install it to your local area, use
+\passthrough{\lstinline!--prefix=$HOME/.local!} or
+\passthrough{\lstinline!--prefix=$HOME!} option. If you want to install
+it to the system area, no option is needed. It will be installed under
+\passthrough{\lstinline!/user/local!} directory.
+
+\begin{lstlisting}
+$ meson setup --prefix=$HOME/.local _build
+$ ninja -C _build
+$ ninja -C _build install
+\end{lstlisting}
+
+You need root privilege to install it to the system area..
+
+\begin{lstlisting}
+$ meson setup _build
+$ ninja -C _build
+$ sudo ninja -C _build install
+\end{lstlisting}
+
+Source files are in src/tfe6 directory.
+
+We made a very small text editor. You can add features to this editor.
+When you add a new feature, be careful about the structure of the
+program. Maybe you need to divide a file into several files. It isn't
+good to put many things into one file. And it is important to think
+about the relationship between source files and widget structures.
+
+The source files are in the
+\href{https://github.com/ToshioCP/Gtk4-tutorial}{Gtk4 tutorial GitHub
+repository}. Download it and see \passthrough{\lstinline!src/tfe6!}
+directory.
+
+Note: When the menu button is clicked, error messages are printed.
+
+\begin{lstlisting}
+(tfe:31153): Gtk-CRITICAL **: 13:05:40.746: _gtk_css_corner_value_get_x: assertion 'corner->class == &GTK_CSS_VALUE_CORNER' failed
+\end{lstlisting}
+
+I found a
+\href{https://discourse.gnome.org/t/menu-button-gives-error-messages-with-latest-gtk4/15689}{message}
+in the GNOME Discourse. The comment says that GTK 4.10 has a bug and it
+is fixed in the version 4.10.5. I haven't check 4.10.5 yet, where the
+UBUNTU GTK4 is still 4.10.4.

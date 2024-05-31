@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkApplicationWindow" id="win">
+    <binding name="title">
+      <closure type="gchararray" function="test">
+      </closure>
+    </binding>
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+        <child>
+          <object class="GtkLabel">
+            <binding name="label">
+              <closure type="gchararray" function="test">
+              </closure>
+            </binding>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <binding name="label" object ="win">
+              <closure type="gchararray" function="test">
+              </closure>
+            </binding>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

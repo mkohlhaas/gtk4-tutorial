@@ -1,0 +1,270 @@
+\section{Signals}\label{signals}
+
+\subsection{Signals}\label{signals-1}
+
+Each object is encapsulated in Gtk programming. And it is not
+recommended to use global variables because they are prone to make the
+program complicated. So, we need something to communicate between
+objects. There are two ways to do so.
+
+\begin{itemize}
+\tightlist
+\item
+  Instance methods: Instance methods are functions on instances. For
+  example,
+  \passthrough{\lstinline!tb = gtk\_text\_view\_get\_buffer (tv)!} is an
+  instance method on the instance \passthrough{\lstinline!tv!}. The
+  caller requests \passthrough{\lstinline!tv!} to give
+  \passthrough{\lstinline!tb!}, which is a GtkTextBuffer instance
+  connected to \passthrough{\lstinline!tv!}.
+\item
+  Signals: For example, \passthrough{\lstinline!activate!} signal on
+  GApplication object. When the application is activated, the signal is
+  emitted. Then the handler, which has been connected to the signal, is
+  invoked.
+\end{itemize}
+
+The caller of methods or signals are usually out of the object. One of
+the difference between these two is that the object is active or
+passive. In methods, objects passively respond to the caller. In
+signals, objects actively send signals to handlers.
+
+GObject signals are registered, connected and emitted.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Signals are registered in the class. The registration is done usually
+  when the class is initialized. Signals can have a default handler,
+  which is sometimes called ``object method handler''. It is not a user
+  handler connected by \passthrough{\lstinline!g\_signal\_connect!}
+  family functions. A default handler is always called on any instance
+  of the class.
+\item
+  Signals are connected to handlers by the macro
+  \passthrough{\lstinline!g\_signal\_connect!} or its family functions.
+  The connection is usually done out of the object. One important thing
+  is that signals are connected on a certain instance. Suppose there
+  exist two GtkButton instances A, B and a function C. Even if you
+  connected the ``clicked'' signal on A to C, B and C are \emph{not}
+  connected.
+\item
+  When Signals are emitted, the connected handlers are invoked. Signals
+  are emitted on the instance of the class.
+\end{enumerate}
+
+\subsection{Signal registration}\label{signal-registration}
+
+In TfeTextView, two signals are registered.
+
+\begin{itemize}
+\tightlist
+\item
+  ``change-file'' signal. This signal is emitted when
+  \passthrough{\lstinline!tv->file!} is changed.
+\item
+  ``open-response'' signal. The function
+  \passthrough{\lstinline!tfe\_text\_view\_open!} doesn't return the
+  status because it can't get the status from the file chooser dialog.
+  (Instead, the call back function gets the status.) This signal is
+  emitted instead of the return value of the function.
+\end{itemize}
+
+A static variable or array is used to store signal ID.
+
+\begin{lstlisting}[language=C]
+enum {
+  CHANGE_FILE,
+  OPEN_RESPONSE,
+  NUMBER_OF_SIGNALS
+};
+
+static guint tfe_text_view_signals[NUMBER_OF_SIGNALS];
+\end{lstlisting}
+
+Signals are registered in the class initialization function.
+
+\begin{lstlisting}[language=C, numbers=left]
+static void
+tfe_text_view_class_init (TfeTextViewClass *class) {
+  GObjectClass *object_class = G_OBJECT_CLASS (class);
+
+  object_class->dispose = tfe_text_view_dispose;
+  tfe_text_view_signals[CHANGE_FILE] = g_signal_new ("change-file",
+                                 G_TYPE_FROM_CLASS (class),
+                                 G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                                 0 /* class offset */,
+                                 NULL /* accumulator */,
+                                 NULL /* accumulator data */,
+                                 NULL /* C marshaller */,
+                                 G_TYPE_NONE /* return_type */,
+                                 0     /* n_params */
+                                 );
+  tfe_text_view_signals[OPEN_RESPONSE] = g_signal_new ("open-response",
+                                 G_TYPE_FROM_CLASS (class),
+                                 G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                                 0 /* class offset */,
+                                 NULL /* accumulator */,
+                                 NULL /* accumulator data */,
+                                 NULL /* C marshaller */,
+                                 G_TYPE_NONE /* return_type */,
+                                 1     /* n_params */,
+                                 G_TYPE_INT
+                                 );
+}
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  6-15: Registers ``change-file'' signal.
+  \passthrough{\lstinline!g\_signal\_new!} function is used. The signal
+  ``change-file'' has no default handler (object method handler) so the
+  offset (the line 9) is set to zero. You usually don't need a default
+  handler. If you need it, use
+  \passthrough{\lstinline!g\_signal\_new\_class\_handler!} function
+  instead of \passthrough{\lstinline!g\_signal\_new!}. See
+  \href{https://docs.gtk.org/gobject/func.signal_new_class_handler.html}{GObject
+  API Reference} for further information.
+\item
+  The return value of \passthrough{\lstinline!g\_signal\_new!} is the
+  signal id. The type of signal id is guint, which is the same as
+  unsigned int. It is used in the function
+  \passthrough{\lstinline!g\_signal\_emit!}.
+\item
+  16-26: Registers ``open-response'' signal. This signal has a
+  parameter.
+\item
+  24: Number of the parameters. ``open-response'' signal has one
+  parameter.
+\item
+  25: The type of the parameter. \passthrough{\lstinline!G\_TYPE\_INT!}
+  is a type of integer. Such fundamental types are described in
+  \href{https://developer-old.gnome.org/gobject/stable/gobject-Type-Information.html}{GObject
+  reference manual}.
+\end{itemize}
+
+The handlers are declared as follows.
+
+\begin{lstlisting}[language=C]
+/* "change-file" signal handler */
+void
+user_function (TfeTextView *tv,
+               gpointer user_data)
+
+/* "open-response" signal handler */
+void
+user_function (TfeTextView *tv,
+               TfeTextViewOpenResponseType response-id,
+               gpointer user_data)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The signal ``change-file'' doesn't have parameter, so the handler's
+  arguments are a TfeTextView instance and a user data.
+\item
+  The signal ``open-response'' signal has one parameter and its
+  arguments are a TfeTextView instance, the signal's parameter and user
+  data.
+\item
+  The variable \passthrough{\lstinline!tv!} points the instance on which
+  the signal is emitted.
+\item
+  The last argument \passthrough{\lstinline!user\_data!} comes from the
+  fourth argument of \passthrough{\lstinline!g\_signal\_connect!}.
+\item
+  The \passthrough{\lstinline!parameter!}
+  (\passthrough{\lstinline!response-id!}) comes from the fourth argument
+  of \passthrough{\lstinline!g\_signal\_emit!}.
+\end{itemize}
+
+The values of the type
+\passthrough{\lstinline!TfeTextViewOpenResponseType!} are defined in
+\passthrough{\lstinline!tfetextview.h!}.
+
+\begin{lstlisting}[language=C]
+/* "open-response" signal response */
+enum TfeTextViewOpenResponseType
+{
+  TFE_OPEN_RESPONSE_SUCCESS,
+  TFE_OPEN_RESPONSE_CANCEL,
+  TFE_OPEN_RESPONSE_ERROR
+};
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The parameter is set to
+  \passthrough{\lstinline!TFE\_OPEN\_RESPONSE\_SUCCESS!} when
+  \passthrough{\lstinline!tfe\_text\_view\_open!} has successfully
+  opened a file and read it.
+\item
+  The parameter is set to
+  \passthrough{\lstinline!TFE\_OPEN\_RESPONSE\_CANCEL!} when the user
+  has canceled.
+\item
+  The parameter is set to
+  \passthrough{\lstinline!TFE\_OPEN\_RESPONSE\_ERROR!} when an error has
+  occurred.
+\end{itemize}
+
+\subsection{Signal connection}\label{signal-connection}
+
+A signal and a handler are connected by the function macro
+\passthrough{\lstinline!g\_signal\_connect!}. There are some similar
+function macros like
+\passthrough{\lstinline!g\_signal\_connect\_after!},
+\passthrough{\lstinline!g\_signal\_connect\_swapped!} and so on.
+However, \passthrough{\lstinline!g\_signal\_connect!} is used most
+often. The signals ``change-file'' and ``open-response'' are connected
+to their callback functions out of the TfeTextView object. Those
+callback functions are defined by users.
+
+For example, callback functions are defined in
+\passthrough{\lstinline!src/tfe6/tfewindow.c!} and their names are
+\passthrough{\lstinline!file\_changed\_cb!} and
+\passthrough{\lstinline!open\_response\_cb!}. They will be explained
+later.
+
+\begin{lstlisting}[language=C]
+g_signal_connect (GTK_TEXT_VIEW (tv), "change-file", G_CALLBACK (file_changed_cb), nb);
+
+g_signal_connect (TFE_TEXT_VIEW (tv), "open-response", G_CALLBACK (open_response_cb), nb);
+\end{lstlisting}
+
+\subsection{Signal emission}\label{signal-emission}
+
+A signal is emitted on the instance. A function
+\passthrough{\lstinline!g\_signal\_emit!} is used to emit the signal.
+The following lines are extracted from
+\passthrough{\lstinline!src/tfetextview/tfetextview.c!}. Each line comes
+from a different line.
+
+\begin{lstlisting}[language=C]
+g_signal_emit (tv, tfe_text_view_signals[CHANGE_FILE], 0);
+g_signal_emit (tv, tfe_text_view_signals[OPEN_RESPONSE], 0, TFE_OPEN_RESPONSE_SUCCESS);
+g_signal_emit (tv, tfe_text_view_signals[OPEN_RESPONSE], 0, TFE_OPEN_RESPONSE_CANCEL);
+g_signal_emit (tv, tfe_text_view_signals[OPEN_RESPONSE], 0, TFE_OPEN_RESPONSE_ERROR);
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  The first argument is the instance on which the signal is emitted.
+\item
+  The second argument is the signal id.
+\item
+  The third argument is the detail of the signal. The signals
+  ``change-file'' and ``open-response'' don't have details and the
+  arguments are zero.
+\item
+  The signal ``change-file'' doesn't have parameters, so there's no
+  fourth argument.
+\item
+  The signal ``open-response'' has one parameter. The fourth argument is
+  the parameter.
+\end{itemize}

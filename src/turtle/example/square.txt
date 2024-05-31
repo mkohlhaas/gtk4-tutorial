@@ -1,0 +1,8 @@
+dp sq (side) {
+  rp (4) {
+    fd side
+    tr 90
+  }
+}
+
+sq (100)

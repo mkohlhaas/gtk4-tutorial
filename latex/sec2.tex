@@ -1,0 +1,100 @@
+\section{Preparation}\label{preparation}
+
+\subsection{Installing GTK 4 into Linux
+distributions}\label{installing-gtk-4-into-linux-distributions}
+
+This section describes how to install GTK 4 into Linux distributions.
+
+There are two ways to install GTK 4.
+
+\begin{itemize}
+\tightlist
+\item
+  Install it from the distribution packages.
+\item
+  Build it from the source files.
+\end{itemize}
+
+\subsubsection{Installation from the distribution
+packages}\label{installation-from-the-distribution-packages}
+
+This is the easiest way to install. I've installed GTK 4 packages
+(version 4.14.2) on Ubuntu 24.04 LTS.
+
+\begin{lstlisting}
+$ sudo apt install libgtk-4-dev
+\end{lstlisting}
+
+It is important to install the development files package (libgtk-4-dev).
+Otherwise, you can't compile any GTK 4 based programs.
+
+Fedora, Debian, Arch, Gentoo and OpenSUSE also have GTK 4 packages. See
+the website of your distribution for further information.
+
+Package information for Arch, Debian/Ubuntu and Fedora is described in
+GTK website,
+\href{https://www.gtk.org/docs/installations/linux\#installing-gtk-from-packages}{Installing
+GTK from packages}.
+
+\subsubsection{Installation from the source
+file}\label{installation-from-the-source-file}
+
+If you want to install a developing version of GTK 4, you need to build
+it from the source. See
+\href{https://docs.gtk.org/gtk4/building.html}{Compiling the GTK
+Libraries} section in the GTK 4 API reference.
+
+\subsection{How to download this
+repository}\label{how-to-download-this-repository}
+
+There are two ways: zip and git. Downloading a zip file is the easiest
+way. However, if you use git and clone this repository, you can easily
+update your local repository by \passthrough{\lstinline!git pull!}
+command.
+
+\subsubsection{Download a zip file}\label{download-a-zip-file}
+
+\begin{itemize}
+\tightlist
+\item
+  Run your browser and open
+  \href{https://github.com/ToshioCP/Gtk4-tutorial}{this repository}.
+\item
+  Click on the green button with \passthrough{\lstinline!<> Code!}. Then
+  a popup menu appears. Click on \passthrough{\lstinline!Download ZIP!}
+  menu.
+\item
+  Then the repository data is downloaded as a zip file into your
+  download folder.
+\item
+  Unzip the file.
+\end{itemize}
+
+\subsubsection{Clone the repository}\label{clone-the-repository}
+
+\begin{itemize}
+\tightlist
+\item
+  Click on the green button with the label
+  \passthrough{\lstinline!<> Code!}. Then a popup menu appears. The
+  first section is \passthrough{\lstinline!Clone!} with three tabs.
+  Click \passthrough{\lstinline!HTTPS!} tab and click on the copy icon,
+  which is on the right of
+  \passthrough{\lstinline!https://github.com/ToshioCP/Gtk4-tutorial.git!}.
+\item
+  Run your terminal and type \passthrough{\lstinline!git clone!},
+  Ctrl+Shift+V. Then the line will be
+  \passthrough{\lstinline!git clone https://github.com/ToshioCP/Gtk4-tutorial.git!}.
+  Press the enter key.
+\item
+  A directory \passthrough{\lstinline!Gtk4-tutorial!} is created. It is
+  the copy of this repository.
+\end{itemize}
+
+\subsection{Examples in the tutorial}\label{examples-in-the-tutorial}
+
+Examples are under the \passthrough{\lstinline!src!} directory. For
+example, the first example of the tutorial is
+\passthrough{\lstinline!pr1.c!} and its pathname is
+\passthrough{\lstinline!src/misc/pr1.c!}. So you don't need to type the
+example codes by yourself.
